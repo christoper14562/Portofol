@@ -32,14 +32,13 @@
     }
   </script>
   <style>
-    /* Custom Scrollbar for Editorial Horizontal Carousel */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-warm-bg text-warm-dark font-sans antialiased selection:bg-warm-accent selection:text-white">
+<body class="bg-warm-bg text-warm-dark font-sans antialiased selection:bg-warm-accent selection:text-white" onclick="closeAllDropdowns(event)">
 
-  <!-- Header / Navigation (Editorial Style) -->
+  <!-- Header / Navigation -->
   <header class="sticky top-0 z-40 bg-warm-bg/90 backdrop-blur-md border-b border-warm-dark/10">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-2">
@@ -68,7 +67,6 @@
     <!-- Hero Section -->
     <section id="about" class="relative pt-6 pb-12 border-b border-warm-dark/10">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <!-- Title & Bio Left -->
         <div class="md:col-span-7 space-y-6">
           <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">Information Systems Undergraduate</p>
           <h1 class="text-5xl md:text-7xl font-serif text-warm-dark leading-[1.1] tracking-tight">
@@ -84,16 +82,14 @@
           </div>
         </div>
 
-        <!-- Profile Image Right -->
         <div class="md:col-span-5 flex justify-center md:justify-end">
           <div class="w-full max-w-sm h-[420px] rounded-2xl overflow-hidden shadow-2xl relative bg-warm-card border border-warm-dark/10">
-            <!-- Ganti src dengan link foto kamu -->
-            <img src="profile.jpeg">
+            <img src="profile.jpeg" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
 
-      <!-- Horizontal Currently Carousel Bar -->
+      <!-- Currently Focused On Bar -->
       <div class="mt-16 pt-8 border-t border-warm-dark/10 space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-xs uppercase tracking-widest font-bold text-warm-accent">Currently Focused On</span>
@@ -124,7 +120,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
         <div class="bg-warm-dark text-white rounded-2xl p-6 shadow-xl space-y-6 flex flex-col justify-between">
           <div class="space-y-4">
             <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-xl text-amber-400">
@@ -166,7 +161,6 @@
             <i class="fa-solid fa-check"></i>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -181,10 +175,9 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
         
-        <!-- Project 1: Tokopedia -->
         <div class="group space-y-3">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
-            <img src="tokopedia.jpeg">
+            <img src="tokopedia.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <a href="https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Doc <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
@@ -195,10 +188,9 @@
           </div>
         </div>
 
-        <!-- Project 2: Enther -->
         <div class="group space-y-3">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
-            <img src="Enther.jpeg">
+            <img src="Enther.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <a href="https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
@@ -209,10 +201,9 @@
           </div>
         </div>
 
-        <!-- Project 3: Starwave -->
         <div class="group space-y-3">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
-            <img src="Starwave.jpeg">
+            <img src="Starwave.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <a href="https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
@@ -223,10 +214,9 @@
           </div>
         </div>
 
-        <!-- Project 4: Spotify -->
         <div class="group space-y-3">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
-            <img src="Tableau UAS.jpeg">
+            <img src="Tableau UAS.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <a href="https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Tableau <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
@@ -281,20 +271,28 @@
           <button onclick="handleCertAction('url', 'https://verify.compfest.id/verify/cf-2026-0be9b970-7788-4a1d-9120-b60a1c0da43b')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
         </div>
 
-        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+        <!-- Kombinasi Hacktiv8 dengan Pop-up Dropdown Mini -->
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm relative">
           <div>
-            <h3 class="text-xs font-bold text-warm-dark">AI-Agent for Data Analysis</h3>
-            <p class="text-[10px] text-warm-muted">Hacktiv8 Indonesia</p>
+            <h3 class="text-xs font-bold text-warm-dark">Hacktiv8 Certificates</h3>
+            <p class="text-[10px] text-warm-muted">AI-Agent & Academic Transcript</p>
           </div>
-          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/09744f51-06f2-42e8-8fde-48d43287d955')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
-        </div>
+          
+          <div class="relative">
+            <button onclick="toggleHacktiv8Menu(event)" class="text-xs font-semibold text-warm-accent hover:underline flex items-center gap-1">
+              Verify Links <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </button>
 
-        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
-          <div>
-            <h3 class="text-xs font-bold text-warm-dark">Academic Transcript (Transkrip Nilai)</h3>
-            <p class="text-[10px] text-warm-muted">Hacktiv8 Portal</p>
+            <!-- Pop-up Dropdown Mini -->
+            <div id="hacktiv8-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white border border-warm-dark/15 rounded-xl shadow-xl z-30 p-2 space-y-1">
+              <a href="https://students.hacktiv8.com/certificates/09744f51-06f2-42e8-8fde-48d43287d955" target="_blank" class="block px-3 py-2 text-xs text-warm-dark hover:bg-warm-card hover:text-warm-accent rounded-lg transition">
+                <i class="fa-solid fa-robot me-1.5 text-warm-accent"></i> AI-Agent Certificate
+              </a>
+              <a href="https://students.hacktiv8.com/certificates/e0013a97-b439-4a7c-b5fd-57f32e852fd8" target="_blank" class="block px-3 py-2 text-xs text-warm-dark hover:bg-warm-card hover:text-warm-accent rounded-lg transition">
+                <i class="fa-solid fa-file-invoice me-1.5 text-warm-accent"></i> Academic Transcript
+              </a>
+            </div>
           </div>
-          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/e0013a97-b439-4a7c-b5fd-57f32e852fd8')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
         </div>
 
         <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
@@ -336,28 +334,35 @@
           Actively contributed as a Support Division staff member for key organizational events. Responsibilities included creating digital attendance verification links for visitors and coordinating inventory requirements with the equipment division.
         </p>
 
+        <!-- Perbaikan Pembungkus Ukuran Foto HIMSISFO -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="space-y-2">
-            <img src="ldkka.jpeg">
+            <div class="h-48 rounded-xl overflow-hidden border border-warm-dark/10">
+              <img src="ldkka.jpeg" class="w-full h-full object-cover">
+            </div>
             <h4 class="font-serif font-bold text-xs text-warm-dark">LDKKA Event</h4>
             <p class="text-[11px] text-warm-muted">Built attendance forms and assisted equipment logistics management.</p>
           </div>
           <div class="space-y-2">
-            <img src="bpar.jpeg">
+            <div class="h-48 rounded-xl overflow-hidden border border-warm-dark/10">
+              <img src="bpar.jpeg" class="w-full h-full object-cover">
+            </div>
             <h4 class="font-serif font-bold text-xs text-warm-dark">Bpar Anniversary Event</h4>
             <p class="text-[11px] text-warm-muted">Managed visitor digital check-ins and operational logistics support.</p>
           </div>
         </div>
+      </div>
 
       <!-- Outreach Program -->
       <div class="bg-white p-8 rounded-2xl border border-warm-dark/10 space-y-6 shadow-sm">
         <h3 class="font-serif font-bold text-xl text-warm-dark border-b border-warm-dark/10 pb-4">Community Teaching Initiatives</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
           <div class="space-y-3 flex flex-col justify-between">
             <div>
-              <img src="Sd wesley.jpeg">
+              <div class="h-36 rounded-xl overflow-hidden border border-warm-dark/10 mb-2">
+                <img src="Sd wesley.jpeg" class="w-full h-full object-cover">
+              </div>
               <h4 class="font-serif font-bold text-sm text-warm-dark">Teaching Visit at TK Wesley</h4>
               <p class="text-[11px] text-warm-muted leading-relaxed">North Semarang. Educational teaching visit engage with early childhood students.</p>
             </div>
@@ -368,7 +373,9 @@
 
           <div class="space-y-3 flex flex-col justify-between">
             <div>
-              <img src="Tanahputih.jpeg">
+              <div class="h-36 rounded-xl overflow-hidden border border-warm-dark/10 mb-2">
+                <img src="Tanahputih.jpeg" class="w-full h-full object-cover">
+              </div>
               <h4 class="font-serif font-bold text-sm text-warm-dark">Tanah Putih Orphanage</h4>
               <p class="text-[11px] text-warm-muted leading-relaxed">Candisari, Semarang. Conducted a 1-month continuous teaching program for orphanage children.</p>
             </div>
@@ -379,7 +386,9 @@
 
           <div class="space-y-3 flex flex-col justify-between">
             <div>
-              <img src="panti.jpeg">
+              <div class="h-36 rounded-xl overflow-hidden border border-warm-dark/10 mb-2">
+                <img src="panti.jpeg" class="w-full h-full object-cover">
+              </div>
               <h4 class="font-serif font-bold text-sm text-warm-dark">Rumah Tahfiz Salsabil</h4>
               <p class="text-[11px] text-warm-muted leading-relaxed">Semarang. Social outreach event organizing food package distribution and community support.</p>
             </div>
@@ -387,7 +396,6 @@
               Google Maps Location <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i>
             </a>
           </div>
-
         </div>
       </div>
     </section>
@@ -395,8 +403,6 @@
     <!-- Get in Touch Section -->
     <section id="contact" class="pt-8 border-t border-warm-dark/10 space-y-8">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-        
-        <!-- Sisi Kiri Contact Info -->
         <div class="md:col-span-5 space-y-6">
           <div>
             <h2 class="text-4xl font-serif text-warm-accent leading-tight">Get in Touch</h2>
@@ -413,7 +419,6 @@
               <a href="mailto:christopherjuanmanuel@gmail.com" class="hover:underline">christopherjuanmanuel@gmail.com</a>
             </div>
 
-            <!-- Social Media Icons -->
             <div class="flex items-center space-x-4 text-base text-warm-dark pt-2">
               <a href="https://www.instagram.com/j_susanto46/?hl=en" target="_blank" class="hover:text-warm-accent transition"><i class="fa-brands fa-instagram"></i></a>
               <a href="https://github.com/swankill" target="_blank" class="hover:text-warm-accent transition"><i class="fa-brands fa-github"></i></a>
@@ -422,7 +427,6 @@
           </div>
         </div>
 
-        <!-- Sisi Kanan Form -->
         <div class="md:col-span-7">
           <form action="mailto:christopherjuanmanuel@gmail.com" method="post" enctype="text/plain" class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
@@ -453,7 +457,6 @@
             </div>
           </form>
         </div>
-
       </div>
     </section>
 
@@ -516,6 +519,20 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    // Toggle Dropdown Menu Mini untuk Hacktiv8
+    function toggleHacktiv8Menu(event) {
+      event.stopPropagation();
+      const menu = document.getElementById('hacktiv8-dropdown');
+      menu.classList.toggle('hidden');
+    }
+
+    function closeAllDropdowns(event) {
+      const menu = document.getElementById('hacktiv8-dropdown');
+      if (menu && !menu.contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    }
 
     // Certificate Action Handler
     function handleCertAction(type, target, title = 'Certificate') {
