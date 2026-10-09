@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Christopher Juan Manuel Susanto | Executive Portfolio & CV</title>
+  <title>Christopher Juan Manuel Susanto | Digital Portfolio</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
           },
           colors: {
-            corporate: {
-              bg: '#0F172A',       /* Deep Slate Blue */
-              card: '#1E293B',     /* Dark Card Slate */
-              border: '#334155',   /* Subtle Border */
-              brand: '#2563EB',    /* Corporate Blue */
-              accent: '#38BDF8'    /* Sky Blue Accent */
+            warm: {
+              bg: '#F9F6F0',       /* Warm Beige Background */
+              card: '#F0EBE1',     /* Soft Card Cream */
+              dark: '#1C1917',     /* Deep Charcoal Black */
+              accent: '#A0431D',   /* Terracotta / Editorial Brown */
+              muted: '#78716C'     /* Warm Gray Text */
             }
           }
         }
@@ -32,370 +32,385 @@
     }
   </script>
   <style>
+    /* Custom Scrollbar for Editorial Horizontal Carousel */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
     @media print {
       body * { visibility: hidden; }
-      #cv-section, #cv-section * { visibility: visible; }
-      #cv-section { position: absolute; left: 0; top: 0; width: 100%; }
+      #cv-modal, #cv-modal * { visibility: visible; }
+      #cv-modal { position: absolute; left: 0; top: 0; width: 100%; background: white !important; }
       .no-print { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-corporate-bg text-slate-200 font-sans antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-warm-bg text-warm-dark font-sans antialiased selection:bg-warm-accent selection:text-white">
 
-  <!-- Minimalist Corporate Top Navigation -->
-  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-corporate-border no-print">
-    <div class="max-w-5xl mx-auto px-6 py-3.5 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider" id="wib-clock">WIB 00:00:00</span>
+  <!-- Header / Navigation (Editorial Style) -->
+  <header class="sticky top-0 z-40 bg-warm-bg/90 backdrop-blur-md border-b border-warm-dark/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="font-serif font-bold text-xl tracking-tight text-warm-dark">C. Juan Susanto</span>
+        <span class="text-[10px] uppercase font-mono px-2 py-0.5 bg-warm-accent/10 text-warm-accent rounded-full ms-2" id="wib-clock">WIB 00:00:00</span>
       </div>
       
-      <!-- View Switcher -->
-      <div class="flex items-center bg-slate-800 p-0.5 rounded-lg border border-corporate-border">
-        <button id="tab-portfolio-btn" onclick="switchTab('portfolio')" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition-all bg-corporate-brand text-white shadow-sm">
-          Portfolio
+      <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest text-warm-muted font-medium">
+        <a href="#about" class="hover:text-warm-accent transition">About</a>
+        <a href="#skills" class="hover:text-warm-accent transition">Skills</a>
+        <a href="#projects" class="hover:text-warm-accent transition">Projects</a>
+        <a href="#experience" class="hover:text-warm-accent transition">Experience</a>
+        <a href="#contact" class="hover:text-warm-accent transition">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openCvModal()" class="text-xs font-semibold px-4 py-2 border border-warm-dark hover:bg-warm-dark hover:text-white transition rounded-full">
+          Harvard ATS CV
         </button>
-        <button id="tab-cv-btn" onclick="switchTab('cv')" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition-all text-slate-400 hover:text-white">
-          CV Mode (ATS)
+        <button onclick="openAdminModal()" class="text-xs text-warm-muted hover:text-warm-dark transition" title="Admin Panel">
+          <i class="fa-solid fa-lock"></i>
         </button>
       </div>
-
-      <!-- Secret Admin Trigger -->
-      <button onclick="openAdminModal()" title="Admin Login" class="text-xs text-slate-500 hover:text-slate-300 transition">
-        <i class="fa-solid fa-lock"></i>
-      </button>
     </div>
   </header>
 
-  <!-- ==================== PORTFOLIO SECTION ==================== -->
-  <main id="portfolio-section" class="max-w-5xl mx-auto px-6 py-12 space-y-16">
+  <main class="max-w-6xl mx-auto px-6 space-y-24 py-12">
     
-    <!-- Hero / Profile Summary -->
-    <section class="flex flex-col md:flex-row items-center gap-8 border-b border-corporate-border pb-12">
-      <div class="w-36 h-36 md:w-44 md:h-44 rounded-xl overflow-hidden border border-corporate-border bg-slate-800 flex-shrink-0 shadow-lg">
-        <!-- Photo 1 Placeholder -->
-        <img src="https://via.placeholder.com/400x400?text=Profile+Photo" alt="Christopher Juan Manuel Susanto" class="w-full h-full object-cover">
-      </div>
-      <div class="space-y-4 text-center md:text-left flex-1">
-        <div>
-          <span class="text-xs font-mono text-corporate-accent uppercase tracking-widest">Information Systems Undergraduate</span>
-          <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight mt-1">Christopher Juan Manuel Susanto</h1>
-          <p class="text-xs text-slate-400 mt-1 font-mono">Universitas Bina Nusantara • Expected Graduation 2027 • West Jakarta, ID</p>
+    <!-- Hero Section (Editorial Layout - Gambar 1) -->
+    <section id="about" class="relative pt-6 pb-12 border-b border-warm-dark/10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- Title & Bio Left -->
+        <div class="md:col-span-7 space-y-6">
+          <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">Information Systems Undergraduate</p>
+          <h1 class="text-5xl md:text-7xl font-serif text-warm-dark leading-[1.1] tracking-tight">
+            Bring Data <br><span class="italic font-normal">To Intelligence</span>
+          </h1>
+          <p class="text-warm-muted text-sm md:text-base max-w-lg leading-relaxed">
+            Universitas Bina Nusantara (Expected 2027). Specializing in Business Intelligence, Data Analytics, and AI Workflows in West Jakarta, Indonesia.
+          </p>
+          <div class="pt-2 flex gap-4">
+            <a href="#contact" class="px-6 py-3 bg-warm-accent hover:bg-opacity-90 text-white text-xs font-semibold rounded-full tracking-wider uppercase transition shadow-md">
+              Get In Touch
+            </a>
+            <button onclick="openCvModal()" class="px-6 py-3 border border-warm-dark text-warm-dark hover:bg-warm-dark hover:text-white text-xs font-semibold rounded-full tracking-wider uppercase transition">
+              Download CV
+            </button>
+          </div>
         </div>
-        <p class="text-slate-300 text-sm leading-relaxed max-w-2xl">
-          Specializing in Business Intelligence, Data Analytics, and Automated Workflows. Proven record in technical support operations, database management, and cross-functional coordination.
-        </p>
-        <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-1">
-          <a href="mailto:christopherjuanmanuel@gmail.com?subject=Inquiry%20from%20Portfolio" target="_blank" class="px-4 py-2 bg-corporate-brand hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow-sm transition flex items-center gap-2">
-            <i class="fa-solid fa-envelope"></i> Contact Me
-          </a>
-          <button onclick="switchTab('cv')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-corporate-border transition flex items-center gap-2">
-            <i class="fa-solid fa-file-pdf"></i> View ATS Resume
-          </button>
+
+        <!-- Profile Image Right -->
+        <div class="md:col-span-5 flex justify-center md:justify-end">
+          <div class="w-full max-w-sm h-[420px] rounded-2xl overflow-hidden shadow-2xl relative bg-warm-card border border-warm-dark/10">
+            <!-- Photo 1 Placeholder -->
+            <img src="https://via.placeholder.com/600x800?text=Christopher+Juan+Manuel" alt="Christopher Juan Manuel Susanto" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal Currently Carousel Bar (Gambar 1 Hero Footer) -->
+      <div class="mt-16 pt-8 border-t border-warm-dark/10 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase tracking-widest font-bold text-warm-accent">Currently Focused On</span>
+          <span class="text-xs text-warm-muted"><i class="fa-solid fa-arrow-right-long me-1"></i> Swipe to explore</span>
+        </div>
+        <div id="currently-list" class="flex gap-4 overflow-x-auto no-scrollbar py-2">
+          
+          <div class="min-w-[280px] md:min-w-[320px] bg-white p-5 rounded-xl border border-warm-dark/10 shadow-sm flex flex-col justify-between space-y-3 flex-shrink-0">
+            <span class="text-[10px] font-mono text-warm-accent uppercase tracking-wider">01 / Hackathon</span>
+            <p class="text-xs text-warm-dark font-medium leading-relaxed">Participating in the <strong>Hackathon IBM</strong>, building AI-driven data intelligence solutions and intelligent agent workflows.</p>
+          </div>
+
+          <div class="min-w-[280px] md:min-w-[320px] bg-white p-5 rounded-xl border border-warm-dark/10 shadow-sm flex flex-col justify-between space-y-3 flex-shrink-0">
+            <span class="text-[10px] font-mono text-warm-accent uppercase tracking-wider">02 / Bootcamp</span>
+            <p class="text-xs text-warm-dark font-medium leading-relaxed">Enrolled in the <strong>Udemy Data Analytics Camp</strong>, sharpening skills in advanced Power BI, Tableau, and complex SQL data modeling.</p>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Currently Section -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between border-b border-corporate-border pb-2">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-2">
-          <i class="fa-solid fa-circle text-[8px] text-emerald-400"></i> Current Engagements
+    <!-- Skills Section (Gaya Kotak Hitam / Gambar 3) -->
+    <section id="skills" class="space-y-8">
+      <div class="text-center space-y-2">
+        <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">Technical Core</p>
+        <h2 class="text-3xl font-serif text-warm-dark">Skills & Capabilities</h2>
+        <p class="text-xs text-warm-muted max-w-md mx-auto">Tools and frameworks used for building data analytics and AI workflows.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Skill Card 1 -->
+        <div class="bg-warm-dark text-white rounded-2xl p-6 shadow-xl space-y-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-xl text-amber-400">
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <h3 class="text-lg font-serif">Business Intelligence</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Power BI, Tableau, and Looker Studio for building executive dashboards and data visualizations.</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs text-warm-accent">
+            <span>Analytics & Reporting</span>
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+
+        <!-- Skill Card 2 -->
+        <div class="bg-warm-dark text-white rounded-2xl p-6 shadow-xl space-y-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-xl text-emerald-400">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h3 class="text-lg font-serif">Database Systems</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Oracle Architecture, SQL Language, and Advanced Excel for complex relational data querying.</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs text-warm-accent">
+            <span>Data Modeling</span>
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+
+        <!-- Skill Card 3 -->
+        <div class="bg-warm-dark text-white rounded-2xl p-6 shadow-xl space-y-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-xl text-sky-400">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <h3 class="text-lg font-serif">AI Agents & Workflows</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Langflow, IBM Bob, and Google Workspace integrations for automated intelligence workflows.</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs text-warm-accent">
+            <span>AI Automation</span>
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects Section (Gaya Gambar 2 Layout Minimalis Grid) -->
+    <section id="projects" class="space-y-8">
+      <div class="text-center space-y-2">
+        <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">• Projects</p>
+        <h2 class="text-3xl md:text-4xl font-serif text-warm-dark max-w-xl mx-auto">
+          Projects that deliver more than design, strategy, and impact.
         </h2>
       </div>
-      <div id="currently-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-corporate-card border border-corporate-border p-4 rounded-xl flex items-start gap-3">
-          <i class="fa-solid fa-layer-group text-corporate-accent mt-0.5 text-sm"></i>
-          <p class="text-xs text-slate-300 leading-relaxed">Participating in the <strong>Hackathon IBM</strong>, building AI-driven data intelligence solutions and intelligent agent workflows.</p>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-4 rounded-xl flex items-start gap-3">
-          <i class="fa-solid fa-chart-line text-corporate-accent mt-0.5 text-sm"></i>
-          <p class="text-xs text-slate-300 leading-relaxed">Enrolled in the <strong>Udemy Data Analytics Camp</strong>, sharpening skills in advanced Power BI, Tableau, and complex SQL data modeling.</p>
-        </div>
-      </div>
-    </section>
 
-    <!-- Technical Competencies -->
-    <section class="space-y-4">
-      <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 border-b border-corporate-border pb-2">Technical Core</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-chart-pie text-blue-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Power BI</h3><p class="text-[10px] text-slate-400 font-mono">BI & Reporting</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-chart-column text-sky-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Tableau</h3><p class="text-[10px] text-slate-400 font-mono">Data Visualization</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-database text-amber-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Oracle & SQL</h3><p class="text-[10px] text-slate-400 font-mono">Database Arch</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-chart-line text-emerald-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Looker Studio</h3><p class="text-[10px] text-slate-400 font-mono">Web Dashboards</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-file-excel text-emerald-500 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Excel</h3><p class="text-[10px] text-slate-400 font-mono">Financial Data</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-robot text-purple-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">IBM Bob</h3><p class="text-[10px] text-slate-400 font-mono">AI Ecosystem</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-solid fa-network-wired text-indigo-400 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Langflow</h3><p class="text-[10px] text-slate-400 font-mono">Agent Workflows</p></div>
-        </div>
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center gap-3">
-          <i class="fa-brands fa-google text-slate-300 text-base"></i>
-          <div><h3 class="text-xs font-semibold text-slate-200">Google Suite</h3><p class="text-[10px] text-slate-400 font-mono">Productivity</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key Projects Section -->
-    <section class="space-y-4">
-      <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 border-b border-corporate-border pb-2">Selected Case Studies & Deliverables</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
         
-        <!-- Tokopedia -->
-        <div class="bg-corporate-card border border-corporate-border rounded-xl overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="h-40 bg-slate-900 border-b border-corporate-border">
-              <!-- Photo 8 Placeholder -->
-              <img src="https://via.placeholder.com/600x400?text=Tokopedia+Project+Preview" alt="Tokopedia Project" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-300">
-            </div>
-            <div class="p-4 space-y-1">
-              <h3 class="text-sm font-bold text-white">Tokopedia Market Analytics Report</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">Comprehensive documentation and data insights research regarding marketplace metrics and platform performance.</p>
-            </div>
-          </div>
-          <div class="p-4 pt-0">
-            <a href="https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-corporate-accent hover:underline">
-              Access Documentation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <!-- Project 1: Tokopedia -->
+        <div class="group space-y-3">
+          <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
+            <!-- Photo 8 Placeholder -->
+            <img src="https://via.placeholder.com/600x400?text=Tokopedia+Project" alt="Tokopedia" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <a href="https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Doc <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
+          </div>
+          <div class="flex justify-between items-baseline pt-1">
+            <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Tokopedia Data Analysis</h3>
+            <span class="text-xs text-warm-muted font-mono">Documentation</span>
           </div>
         </div>
 
-        <!-- Enther -->
-        <div class="bg-corporate-card border border-corporate-border rounded-xl overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="h-40 bg-slate-900 border-b border-corporate-border">
-              <!-- Photo 9 Placeholder -->
-              <img src="https://via.placeholder.com/600x400?text=Enther+Figma+Preview" alt="Enther Project" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-300">
-            </div>
-            <div class="p-4 space-y-1">
-              <h3 class="text-sm font-bold text-white">Enther Platform UI/UX System</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">Interactive system interface and digital prototype created for user-centric digital experiences.</p>
-            </div>
-          </div>
-          <div class="p-4 pt-0">
-            <a href="https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-corporate-accent hover:underline">
-              View Figma Prototype <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <!-- Project 2: Echo Studio / Enther -->
+        <div class="group space-y-3">
+          <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
+            <!-- Photo 9 Placeholder -->
+            <img src="https://via.placeholder.com/600x400?text=Enther+Figma+Design" alt="Enther Project" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <a href="https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
+          </div>
+          <div class="flex justify-between items-baseline pt-1">
+            <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Enther UI/UX Design</h3>
+            <span class="text-xs text-warm-muted font-mono">Figma Prototype</span>
           </div>
         </div>
 
-        <!-- Starwave -->
-        <div class="bg-corporate-card border border-corporate-border rounded-xl overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="h-40 bg-slate-900 border-b border-corporate-border">
-              <!-- Photo 10 Placeholder -->
-              <img src="https://via.placeholder.com/600x400?text=Starwave+Figma+Preview" alt="Starwave Project" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-300">
-            </div>
-            <div class="p-4 space-y-1">
-              <h3 class="text-sm font-bold text-white">Starwave Interface Architecture</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">Comprehensive UI design prototype exploring modern interface design patterns and accessibility.</p>
-            </div>
-          </div>
-          <div class="p-4 pt-0">
-            <a href="https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-corporate-accent hover:underline">
-              View Figma Prototype <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <!-- Project 3: Starwave -->
+        <div class="group space-y-3">
+          <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
+            <!-- Photo 10 Placeholder -->
+            <img src="https://via.placeholder.com/600x400?text=Starwave+Design" alt="Starwave Project" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <a href="https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
+          </div>
+          <div class="flex justify-between items-baseline pt-1">
+            <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Starwave Interface</h3>
+            <span class="text-xs text-warm-muted font-mono">Figma Prototype</span>
           </div>
         </div>
 
-        <!-- Spotify -->
-        <div class="bg-corporate-card border border-corporate-border rounded-xl overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="h-40 bg-slate-900 border-b border-corporate-border">
-              <!-- Photo 11 Placeholder -->
-              <img src="https://via.placeholder.com/600x400?text=Spotify+Tableau+Preview" alt="Spotify Songlist Project" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-300">
-            </div>
-            <div class="p-4 space-y-1">
-              <h3 class="text-sm font-bold text-white">Spotify Centennial Audio Trends (1920–2020)</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">Interactive Tableau analytics dashboard analyzing a century of music trends and audio features.</p>
-            </div>
-          </div>
-          <div class="p-4 pt-0">
-            <a href="https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-corporate-accent hover:underline">
-              Open Tableau Dashboard <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <!-- Project 4: Spotify -->
+        <div class="group space-y-3">
+          <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
+            <!-- Photo 11 Placeholder -->
+            <img src="https://via.placeholder.com/600x400?text=Spotify+Tableau" alt="Spotify Tableau" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <a href="https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Tableau <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
             </a>
+          </div>
+          <div class="flex justify-between items-baseline pt-1">
+            <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Spotify Songlist (1920–2020)</h3>
+            <span class="text-xs text-warm-muted font-mono">Tableau Dashboard</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Professional Credentials & Certifications -->
-    <section class="space-y-4">
-      <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 border-b border-corporate-border pb-2">Verified Certifications</h2>
-      <div id="certifications-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Belajar Dasar Cloud dan Gen AI di AWS</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Dicoding Indonesia</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/JLX1KLRKGP72')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Spec-Driven Development dengan Kiro</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Dicoding Indonesia</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/N9ZO04LMYXG5')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Introduction to Financial Literacy</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Dicoding Indonesia</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/07Z6Q5DWRZQR')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">COMPFEST 18</h3>
-            <p class="text-[10px] text-slate-400 font-mono">COMPFEST Verification System</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://verify.compfest.id/verify/cf-2026-0be9b970-7788-4a1d-9120-b60a1c0da43b')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">AI-Agent for Data Analysis</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Hacktiv8 Indonesia</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/09744f51-06f2-42e8-8fde-48d43287d955')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Academic Transcript (Transkrip Nilai)</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Hacktiv8 Student Portal</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/e0013a97-b439-4a7c-b5fd-57f32e852fd8')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Bootcamp Data Analytics</h3>
-            <p class="text-[10px] text-slate-400 font-mono">HariSenin.com</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://drive.google.com/drive/folders/1rctqk0X0CXPmDQGBzpeeQhFQ9wzya44R?usp=sharing')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Drive Folder <i class="fa-solid fa-folder-open text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-        <div class="bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-semibold text-slate-200">Oracle Cloud Infrastructure (OCI)</h3>
-            <p class="text-[10px] text-slate-400 font-mono">Oracle</p>
-          </div>
-          <button onclick="handleCertAction('url', 'https://drive.google.com/drive/folders/1PgkPVOnjD1IAU8j3vuX2TBxSXBNu0Q9k?usp=sharing')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            Drive Folder <i class="fa-solid fa-folder-open text-[9px] ms-1"></i>
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Experience Timeline -->
+    <!-- Professional Certifications -->
     <section class="space-y-6">
-      <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 border-b border-corporate-border pb-2">Professional & Community Experience</h2>
-      
-      <!-- HIMSISFO -->
-      <div class="bg-corporate-card border border-corporate-border rounded-xl p-5 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-corporate-border pb-3">
+      <div class="text-center space-y-2">
+        <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">• Credentials</p>
+        <h2 class="text-3xl font-serif text-warm-dark">Professional Certifications</h2>
+      </div>
+
+      <div id="certifications-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
           <div>
-            <h3 class="text-sm font-bold text-white">Active Staff — Support Division</h3>
-            <p class="text-xs text-corporate-accent font-mono">HIMSISFO (Himpunan Mahasiswa Sistem Informasi BINUS)</p>
+            <h3 class="text-xs font-bold text-warm-dark">Belajar Dasar Cloud dan Gen AI di AWS</h3>
+            <p class="text-[10px] text-warm-muted">Dicoding Indonesia</p>
           </div>
-          <span class="text-[10px] font-mono text-slate-400 mt-1 sm:mt-0">Organizational Role</span>
+          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/JLX1KLRKGP72')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
         </div>
-        <p class="text-xs text-slate-300 leading-relaxed">
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">Spec-Driven Development dengan Kiro</h3>
+            <p class="text-[10px] text-warm-muted">Dicoding Indonesia</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/N9ZO04LMYXG5')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">Introduction to Financial Literacy</h3>
+            <p class="text-[10px] text-warm-muted">Dicoding Indonesia</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://www.dicoding.com/certificates/07Z6Q5DWRZQR')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">COMPFEST 18</h3>
+            <p class="text-[10px] text-warm-muted">COMPFEST Verification</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://verify.compfest.id/verify/cf-2026-0be9b970-7788-4a1d-9120-b60a1c0da43b')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">AI-Agent for Data Analysis</h3>
+            <p class="text-[10px] text-warm-muted">Hacktiv8 Indonesia</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/09744f51-06f2-42e8-8fde-48d43287d955')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">Academic Transcript (Transkrip Nilai)</h3>
+            <p class="text-[10px] text-warm-muted">Hacktiv8 Portal</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://students.hacktiv8.com/certificates/e0013a97-b439-4a7c-b5fd-57f32e852fd8')" class="text-xs font-semibold text-warm-accent hover:underline">Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">Bootcamp Data Analytics</h3>
+            <p class="text-[10px] text-warm-muted">HariSenin.com</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://drive.google.com/drive/folders/1rctqk0X0CXPmDQGBzpeeQhFQ9wzya44R?usp=sharing')" class="text-xs font-semibold text-warm-accent hover:underline">Drive Link <i class="fa-solid fa-folder-open text-[10px] ms-1"></i></button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="text-xs font-bold text-warm-dark">Oracle Cloud Infrastructure (OCI)</h3>
+            <p class="text-[10px] text-warm-muted">Oracle</p>
+          </div>
+          <button onclick="handleCertAction('url', 'https://drive.google.com/drive/folders/1PgkPVOnjD1IAU8j3vuX2TBxSXBNu0Q9k?usp=sharing')" class="text-xs font-semibold text-warm-accent hover:underline">Drive Link <i class="fa-solid fa-folder-open text-[10px] ms-1"></i></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="space-y-8">
+      <div class="text-center space-y-2">
+        <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">• Timeline</p>
+        <h2 class="text-3xl font-serif text-warm-dark">Experience & Outreach</h2>
+      </div>
+
+      <!-- HIMSISFO -->
+      <div class="bg-white p-8 rounded-2xl border border-warm-dark/10 space-y-6 shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-warm-dark/10 pb-4">
+          <div>
+            <h3 class="font-serif font-bold text-xl text-warm-dark">Active Staff — Support Division</h3>
+            <p class="text-xs text-warm-accent">HIMSISFO (Himpunan Mahasiswa Sistem Informasi BINUS)</p>
+          </div>
+          <span class="text-xs font-mono text-warm-muted mt-2 md:mt-0">Organizational Experience</span>
+        </div>
+        <p class="text-xs text-warm-dark leading-relaxed">
           Actively contributed as a Support Division staff member for key organizational events. Responsibilities included creating digital attendance verification links for visitors and coordinating inventory requirements with the equipment division.
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          <div class="bg-slate-900/80 p-2.5 rounded-lg border border-corporate-border">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-2">
             <!-- Photo 12 Placeholder -->
-            <img src="https://via.placeholder.com/500x300?text=LDKKA+Event+Photo" alt="LDKKA" class="w-full h-32 object-cover rounded mb-2">
-            <h4 class="font-bold text-xs text-slate-200">LDKKA Event Execution</h4>
-            <p class="text-[11px] text-slate-400">Created visitor attendance tracking forms and managed equipment logistics.</p>
+            <img src="https://via.placeholder.com/500x300?text=LDKKA+Event" alt="LDKKA" class="w-full h-40 object-cover rounded-xl border border-warm-dark/10">
+            <h4 class="font-serif font-bold text-xs text-warm-dark">LDKKA Event</h4>
+            <p class="text-[11px] text-warm-muted">Built attendance forms and assisted equipment logistics management.</p>
           </div>
-          <div class="bg-slate-900/80 p-2.5 rounded-lg border border-corporate-border">
+          <div class="space-y-2">
             <!-- Photo 13 Placeholder -->
-            <img src="https://via.placeholder.com/500x300?text=Bpar+Event+Photo" alt="Bpar Event" class="w-full h-32 object-cover rounded mb-2">
-            <h4 class="font-bold text-xs text-slate-200">Bpar Anniversary Celebration</h4>
-            <p class="text-[11px] text-slate-400">Handled digital check-ins and procurement itemization for the operational team.</p>
+            <img src="https://via.placeholder.com/500x300?text=Bpar+Event" alt="Bpar" class="w-full h-40 object-cover rounded-xl border border-warm-dark/10">
+            <h4 class="font-serif font-bold text-xs text-warm-dark">Bpar Anniversary Event</h4>
+            <p class="text-[11px] text-warm-muted">Managed visitor digital check-ins and operational logistics support.</p>
           </div>
         </div>
       </div>
 
       <!-- Outreach Program -->
-      <div class="bg-corporate-card border border-corporate-border rounded-xl p-5 space-y-4">
-        <h3 class="text-sm font-bold text-white border-b border-corporate-border pb-3">Social Community & Educational Initiatives</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="bg-white p-8 rounded-2xl border border-warm-dark/10 space-y-6 shadow-sm">
+        <h3 class="font-serif font-bold text-xl text-warm-dark border-b border-warm-dark/10 pb-4">Community Teaching Initiatives</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div class="bg-slate-900/80 p-3 rounded-lg border border-corporate-border flex flex-col justify-between">
-            <div class="space-y-2">
+          <div class="space-y-3 flex flex-col justify-between">
+            <div>
               <!-- Photo 2 Placeholder -->
-              <img src="https://via.placeholder.com/400x250?text=TK+Wesley+Teaching" alt="TK Wesley" class="w-full h-28 object-cover rounded mb-1">
-              <h4 class="font-semibold text-xs text-slate-200">Teaching Visit at TK Wesley</h4>
-              <p class="text-[11px] text-slate-400">North Semarang. Early childhood educational visit and learning activities.</p>
+              <img src="https://via.placeholder.com/400x250?text=TK+Wesley" alt="TK Wesley" class="w-full h-32 object-cover rounded-xl border border-warm-dark/10 mb-2">
+              <h4 class="font-serif font-bold text-sm text-warm-dark">Teaching Visit at TK Wesley</h4>
+              <p class="text-[11px] text-warm-muted leading-relaxed">North Semarang. Educational teaching visit engage with early childhood students.</p>
             </div>
-            <a href="https://share.google/h2RT76jQoNpFvnHke" target="_blank" class="mt-3 text-[11px] font-mono text-corporate-accent hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-location-dot"></i> Maps Location
+            <a href="https://share.google/h2RT76jQoNpFvnHke" target="_blank" class="text-xs font-semibold text-warm-accent hover:underline">
+              Google Maps Location <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i>
             </a>
           </div>
 
-          <div class="bg-slate-900/80 p-3 rounded-lg border border-corporate-border flex flex-col justify-between">
-            <div class="space-y-2">
+          <div class="space-y-3 flex flex-col justify-between">
+            <div>
               <!-- Photo 3 Placeholder -->
-              <img src="https://via.placeholder.com/400x250?text=Tanah+Putih+Orphanage" alt="Tanah Putih Orphanage" class="w-full h-28 object-cover rounded mb-1">
-              <h4 class="font-semibold text-xs text-slate-200">Tanah Putih Teaching Outreach</h4>
-              <p class="text-[11px] text-slate-400">Candisari, Semarang. Executed a 1-month continuous educational program for children.</p>
+              <img src="https://via.placeholder.com/400x250?text=Tanah+Putih" alt="Tanah Putih" class="w-full h-32 object-cover rounded-xl border border-warm-dark/10 mb-2">
+              <h4 class="font-serif font-bold text-sm text-warm-dark">Tanah Putih Orphanage</h4>
+              <p class="text-[11px] text-warm-muted leading-relaxed">Candisari, Semarang. Conducted a 1-month continuous teaching program for orphanage children.</p>
             </div>
-            <a href="https://maps.app.goo.gl/6MfE7RELWrgHjnB47" target="_blank" class="mt-3 text-[11px] font-mono text-corporate-accent hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-location-dot"></i> Maps Location
+            <a href="https://maps.app.goo.gl/6MfE7RELWrgHjnB47" target="_blank" class="text-xs font-semibold text-warm-accent hover:underline">
+              Google Maps Location <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i>
             </a>
           </div>
 
-          <div class="bg-slate-900/80 p-3 rounded-lg border border-corporate-border flex flex-col justify-between">
-            <div class="space-y-2">
+          <div class="space-y-3 flex flex-col justify-between">
+            <div>
               <!-- Photo 4 Placeholder -->
-              <img src="https://via.placeholder.com/400x250?text=Salsabil+Orphanage" alt="Salsabil Orphanage" class="w-full h-28 object-cover rounded mb-1">
-              <h4 class="font-semibold text-xs text-slate-200">Rumah Tahfiz Salsabil Program</h4>
-              <p class="text-[11px] text-slate-400">Semarang. Social outreach event organizing food package distribution and support.</p>
+              <img src="https://via.placeholder.com/400x250?text=Rumah+Tahfiz" alt="Salsabil" class="w-full h-32 object-cover rounded-xl border border-warm-dark/10 mb-2">
+              <h4 class="font-serif font-bold text-sm text-warm-dark">Rumah Tahfiz Salsabil</h4>
+              <p class="text-[11px] text-warm-muted leading-relaxed">Semarang. Social outreach event organizing food package distribution and community support.</p>
             </div>
-            <a href="https://g.co/kgs/ombxu7j" target="_blank" class="mt-3 text-[11px] font-mono text-corporate-accent hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-location-dot"></i> Maps Location
+            <a href="https://g.co/kgs/ombxu7j" target="_blank" class="text-xs font-semibold text-warm-accent hover:underline">
+              Google Maps Location <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i>
             </a>
           </div>
 
@@ -403,42 +418,95 @@
       </div>
     </section>
 
-    <!-- Footer Contact -->
-    <section class="border-t border-corporate-border pt-10 text-center space-y-4">
-      <h2 class="text-lg font-bold text-white">Get In Touch</h2>
-      <p class="text-xs text-slate-400 max-w-sm mx-auto">Open for professional opportunities, business intelligence discussions, and technical collaborations.</p>
-      
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
-        <a href="mailto:christopherjuanmanuel@gmail.com?subject=Contact%20Inquiry" class="px-5 py-2 bg-corporate-brand hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition flex items-center gap-2">
-          <i class="fa-solid fa-paper-plane"></i> Direct Email
-        </a>
-        <button onclick="switchTab('cv')" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-corporate-border text-xs font-semibold rounded-lg transition flex items-center gap-2">
-          <i class="fa-solid fa-file-arrow-down"></i> Download Resume
-        </button>
-      </div>
+    <!-- Get in Touch Section (Gambar 4 Layout Persis dengan Tombol Download CV Tambahan) -->
+    <section id="contact" class="pt-8 border-t border-warm-dark/10 space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+        
+        <!-- Sisi Kiri Contact Info -->
+        <div class="md:col-span-5 space-y-6">
+          <div>
+            <h2 class="text-4xl font-serif text-warm-accent leading-tight">Get in Touch</h2>
+            <p class="text-lg font-serif text-warm-accent italic mt-2">I'd like to hear from you!</p>
+          </div>
 
-      <div class="flex justify-center space-x-5 pt-3 text-lg text-slate-400">
-        <a href="https://github.com/swankill" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/juan-susanto-88291a29a/" target="_blank" class="hover:text-blue-400 transition"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/j_susanto46/?hl=en" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram"></i></a>
+          <p class="text-xs text-warm-muted leading-relaxed">
+            If you have any inquiries or just want to say hi, please use the contact form!
+          </p>
+
+          <!-- Tombol Donlod CV Tambahan sesuai instruksi -->
+          <div class="pt-2">
+            <button onclick="openCvModal()" class="px-6 py-2.5 border border-warm-accent text-warm-accent hover:bg-warm-accent hover:text-white text-xs font-semibold rounded-full transition flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf"></i> Download Harvard ATS CV
+            </button>
+          </div>
+
+          <div class="space-y-4 pt-4">
+            <div class="flex items-center space-x-3 text-xs font-medium text-warm-dark">
+              <i class="fa-regular fa-envelope text-base"></i>
+              <a href="mailto:christopherjuanmanuel@gmail.com" class="hover:underline">christopherjuanmanuel@gmail.com</a>
+            </div>
+
+            <!-- Social Media Icons (Gambar 4) -->
+            <div class="flex items-center space-x-4 text-base text-warm-dark pt-2">
+              <a href="https://www.instagram.com/j_susanto46/?hl=en" target="_blank" class="hover:text-warm-accent transition"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://github.com/swankill" target="_blank" class="hover:text-warm-accent transition"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/juan-susanto-88291a29a/" target="_blank" class="hover:text-warm-accent transition"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sisi Kanan Form (Gambar 4) -->
+        <div class="md:col-span-7">
+          <form action="mailto:christopherjuanmanuel@gmail.com" method="post" enctype="text/plain" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="text-[11px] font-medium text-warm-dark">First Name</label>
+                <input type="text" name="First Name" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+              </div>
+              <div class="space-y-1">
+                <label class="text-[11px] font-medium text-warm-dark">Last Name</label>
+                <input type="text" name="Last Name" class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-medium text-warm-dark">Email *</label>
+              <input type="email" name="Email" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-medium text-warm-dark">Message</label>
+              <textarea name="Message" rows="5" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs resize-none"></textarea>
+            </div>
+
+            <div class="flex justify-end pt-2">
+              <button type="submit" class="px-8 py-2.5 bg-warm-accent hover:bg-opacity-90 text-white text-xs font-semibold rounded shadow transition">
+                Send
+              </button>
+            </div>
+          </form>
+        </div>
+
       </div>
     </section>
+
   </main>
 
-  <!-- ==================== HARVARD ATS CV SECTION ==================== -->
-  <div id="cv-section" class="hidden min-h-screen bg-white text-slate-900 py-10 px-4">
-    <div class="max-w-3xl mx-auto bg-white p-8 shadow-none border border-slate-300 font-serif">
+  <!-- CV Modal Overlay (Harvard ATS Standard) -->
+  <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white text-slate-900 max-w-3xl w-full p-8 md:p-10 rounded-xl shadow-2xl space-y-6 font-serif max-h-[90vh] overflow-y-auto relative">
       
-      <div class="no-print flex justify-between items-center mb-6 pb-4 border-b border-slate-200 font-sans">
-        <button onclick="switchTab('portfolio')" class="text-xs font-semibold text-slate-600 hover:text-slate-900">
-          <i class="fa-solid fa-arrow-left me-1"></i> Return to Portfolio
+      <!-- Top Action Bar (No Print) -->
+      <div class="no-print flex justify-between items-center pb-4 border-b border-slate-300 font-sans">
+        <button onclick="closeCvModal()" class="text-xs font-bold text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-xmark me-1"></i> Close Modal
         </button>
-        <button onclick="window.print()" class="px-4 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded hover:bg-slate-800 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-print"></i> Save / Print PDF
+        <button onclick="window.print()" class="px-4 py-2 bg-warm-accent text-white text-xs font-semibold rounded hover:bg-opacity-90 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-print"></i> Print / Save as PDF
         </button>
       </div>
 
-      <!-- CV Header -->
+      <!-- CV Document Body -->
       <div class="text-center space-y-1 pb-3 border-b-2 border-slate-900">
         <h1 class="text-2xl font-bold uppercase tracking-wider text-slate-900">CHRISTOPHER JUAN MANUEL SUSANTO</h1>
         <p class="text-[11px] font-sans text-slate-700">
@@ -446,18 +514,16 @@
         </p>
       </div>
 
-      <!-- Education -->
-      <div class="mt-5 space-y-2">
+      <div class="space-y-2">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-0.5 font-sans">Education</h2>
         <div class="flex justify-between items-baseline text-xs">
           <div><span class="font-bold">UNIVERSITAS BINA NUSANTARA</span> — <span class="italic">Bachelor of Information Systems</span></div>
-          <div class="font-sans text-slate-600">Expected 2027</div>
+          <div class="font-sans text-slate-600">Expected Graduation: 2027</div>
         </div>
-        <p class="text-[11px] text-slate-700 font-sans">Focus: Database Systems, Business Intelligence, Data Analytics & Systems Architecture.</p>
+        <p class="text-[11px] text-slate-700 font-sans">Relevant Focus: Database Systems, Business Intelligence, Data Analytics & Systems Architecture.</p>
       </div>
 
-      <!-- Technical Skills -->
-      <div class="mt-5 space-y-1.5">
+      <div class="space-y-1.5">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-0.5 font-sans">Technical Competencies</h2>
         <ul class="text-[11px] space-y-1 font-sans text-slate-800">
           <li><strong>Data Analytics & Visualization:</strong> Power BI, Tableau, Looker Studio, Excel (Advanced Data Modeling)</li>
@@ -466,8 +532,7 @@
         </ul>
       </div>
 
-      <!-- Experience -->
-      <div class="mt-5 space-y-3">
+      <div class="space-y-3">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-0.5 font-sans">Organizational Experience</h2>
         <div>
           <div class="flex justify-between items-baseline text-xs">
@@ -482,8 +547,7 @@
         </div>
       </div>
 
-      <!-- Community Outreach -->
-      <div class="mt-5 space-y-3">
+      <div class="space-y-3">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-0.5 font-sans">Community Outreach</h2>
         <div>
           <div class="flex justify-between items-baseline text-xs">
@@ -495,8 +559,7 @@
         </div>
       </div>
 
-      <!-- Certifications -->
-      <div class="mt-5 space-y-1">
+      <div class="space-y-1">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-0.5 font-sans">Certifications</h2>
         <ul class="list-disc list-inside text-[11px] font-sans space-y-0.5 text-slate-700">
           <li>AI-Agent for Data Analysis — Hacktiv8</li>
@@ -509,14 +572,14 @@
     </div>
   </div>
 
-  <!-- Image Popup Modal -->
+  <!-- Image Modal Popup -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-corporate-card border border-corporate-border rounded-xl max-w-xl w-full p-4 relative space-y-3">
-      <button onclick="closeImageModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white">
+    <div class="bg-white rounded-xl max-w-xl w-full p-4 relative space-y-3">
+      <button onclick="closeImageModal()" class="absolute top-3 right-3 text-slate-500 hover:text-black">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 id="modal-title" class="text-xs font-bold text-white uppercase tracking-wider font-mono">Document Preview</h3>
-      <div class="bg-slate-900 rounded border border-corporate-border overflow-hidden max-h-[65vh] flex items-center justify-center">
+      <h3 id="modal-title" class="text-xs font-bold font-mono uppercase text-warm-dark">Certificate View</h3>
+      <div class="bg-slate-100 rounded border overflow-hidden max-h-[65vh] flex items-center justify-center">
         <img id="modal-image" src="" alt="Certificate" class="max-h-[60vh] w-auto object-contain">
       </div>
     </div>
@@ -524,34 +587,34 @@
 
   <!-- Secret Admin Modal -->
   <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-corporate-card border border-corporate-border rounded-xl max-w-sm w-full p-5 relative space-y-4">
-      <button onclick="closeAdminModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white">
+    <div class="bg-white rounded-xl max-w-sm w-full p-6 relative space-y-4">
+      <button onclick="closeAdminModal()" class="absolute top-3 right-3 text-slate-400 hover:text-black">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Admin Management</h3>
+      <h3 class="text-sm font-bold font-serif text-warm-dark">Admin Panel</h3>
       
       <div id="admin-auth-step" class="space-y-3">
-        <input type="password" id="admin-passcode" placeholder="Enter Access Code" class="w-full px-3 py-2 bg-slate-900 border border-corporate-border rounded-md text-xs text-white focus:outline-none focus:border-blue-500">
-        <button onclick="verifyAdmin()" class="w-full py-1.5 bg-corporate-brand text-white rounded-md text-xs font-semibold">Authenticate</button>
+        <input type="password" id="admin-passcode" placeholder="Enter Passcode" class="w-full px-3 py-2 border rounded text-xs">
+        <button onclick="verifyAdmin()" class="w-full py-2 bg-warm-accent text-white rounded text-xs font-semibold">Unlock</button>
       </div>
 
       <div id="admin-content-step" class="hidden space-y-4">
         <div class="space-y-2">
-          <label class="text-[10px] font-mono text-slate-400 uppercase">Add Current Engagement</label>
-          <input type="text" id="new-currently-input" placeholder="Engagement description..." class="w-full px-3 py-2 bg-slate-900 border border-corporate-border rounded-md text-xs text-white">
-          <button onclick="addCurrentlyItem()" class="w-full py-1.5 bg-emerald-600 text-white rounded-md text-xs font-semibold">Save Item</button>
+          <label class="text-[10px] font-mono text-warm-muted uppercase">Add Current Activity</label>
+          <input type="text" id="new-currently-input" placeholder="Activity..." class="w-full px-3 py-2 border rounded text-xs">
+          <button onclick="addCurrentlyItem()" class="w-full py-1.5 bg-emerald-600 text-white rounded text-xs font-semibold">Add Activity</button>
         </div>
 
-        <div class="space-y-2 border-t border-corporate-border pt-3">
-          <label class="text-[10px] font-mono text-slate-400 uppercase">Add Certificate Record</label>
-          <input type="text" id="cert-title-input" placeholder="Title" class="w-full px-2.5 py-1.5 bg-slate-900 border border-corporate-border rounded-md text-xs text-white">
-          <input type="text" id="cert-issuer-input" placeholder="Issuer" class="w-full px-2.5 py-1.5 bg-slate-900 border border-corporate-border rounded-md text-xs text-white">
-          <input type="text" id="cert-target-input" placeholder="Link URL / Image Path" class="w-full px-2.5 py-1.5 bg-slate-900 border border-corporate-border rounded-md text-xs text-white">
-          <select id="cert-type-input" class="w-full px-2.5 py-1.5 bg-slate-900 border border-corporate-border rounded-md text-xs text-white">
-            <option value="url">External Link URL</option>
-            <option value="image">Image Lightbox Popup</option>
+        <div class="space-y-2 border-t pt-3">
+          <label class="text-[10px] font-mono text-warm-muted uppercase">Add Certificate</label>
+          <input type="text" id="cert-title-input" placeholder="Title" class="w-full px-2 py-1 border rounded text-xs">
+          <input type="text" id="cert-issuer-input" placeholder="Issuer" class="w-full px-2 py-1 border rounded text-xs">
+          <input type="text" id="cert-target-input" placeholder="URL or Image" class="w-full px-2 py-1 border rounded text-xs">
+          <select id="cert-type-input" class="w-full px-2 py-1 border rounded text-xs">
+            <option value="url">External Link</option>
+            <option value="image">Image Lightbox</option>
           </select>
-          <button onclick="addNewCertItem()" class="w-full py-1.5 bg-corporate-brand text-white rounded-md text-xs font-semibold">Add Certificate</button>
+          <button onclick="addNewCertItem()" class="w-full py-1.5 bg-warm-accent text-white rounded text-xs font-semibold">Save Certificate</button>
         </div>
       </div>
     </div>
@@ -567,28 +630,12 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Tab Switcher
-    function switchTab(tab) {
-      const portSection = document.getElementById('portfolio-section');
-      const cvSection = document.getElementById('cv-section');
-      const portBtn = document.getElementById('tab-portfolio-btn');
-      const cvBtn = document.getElementById('tab-cv-btn');
-
-      if(tab === 'portfolio') {
-        portSection.classList.remove('hidden');
-        cvSection.classList.add('hidden');
-        portBtn.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition-all bg-corporate-brand text-white shadow-sm";
-        cvBtn.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition-all text-slate-400 hover:text-white";
-      } else {
-        portSection.classList.add('hidden');
-        cvSection.classList.remove('hidden');
-        cvBtn.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition-all bg-corporate-brand text-white shadow-sm";
-        portBtn.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition-all text-slate-400 hover:text-white";
-      }
-    }
+    // CV Modal Handlers
+    function openCvModal() { document.getElementById('cv-modal').classList.remove('hidden'); }
+    function closeCvModal() { document.getElementById('cv-modal').classList.add('hidden'); }
 
     // Certificate Action Handler
-    function handleCertAction(type, target, title = 'Document Preview') {
+    function handleCertAction(type, target, title = 'Certificate') {
       if(type === 'url') {
         window.open(target, '_blank');
       } else if(type === 'image') {
@@ -597,35 +644,26 @@
         document.getElementById('image-modal').classList.remove('hidden');
       }
     }
-    function closeImageModal() {
-      document.getElementById('image-modal').classList.add('hidden');
-    }
+    function closeImageModal() { document.getElementById('image-modal').classList.add('hidden'); }
 
-    // Admin & LocalStorage Management
-    function openAdminModal() {
-      document.getElementById('admin-modal').classList.remove('hidden');
-    }
-    function closeAdminModal() {
-      document.getElementById('admin-modal').classList.add('hidden');
-    }
+    // Admin Panel Handlers
+    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
     function verifyAdmin() {
-      const pwd = document.getElementById('admin-passcode').value;
-      if(pwd === "juan123") {
+      if(document.getElementById('admin-passcode').value === "juan123") {
         document.getElementById('admin-auth-step').classList.add('hidden');
         document.getElementById('admin-content-step').classList.remove('hidden');
       } else {
-        alert("Authentication failed.");
+        alert("Wrong passcode!");
       }
     }
 
     function addCurrentlyItem() {
       const val = document.getElementById('new-currently-input').value;
       if(!val) return;
-      
       let cur = JSON.parse(localStorage.getItem('custom_currently') || "[]");
       cur.push(val);
       localStorage.setItem('custom_currently', JSON.stringify(cur));
-      
       renderDynamicData();
       document.getElementById('new-currently-input').value = '';
     }
@@ -635,13 +673,10 @@
       const issuer = document.getElementById('cert-issuer-input').value;
       const target = document.getElementById('cert-target-input').value;
       const type = document.getElementById('cert-type-input').value;
-
       if(!title || !target) return;
-
       let certs = JSON.parse(localStorage.getItem('custom_certs') || "[]");
       certs.push({ title, issuer, target, type });
       localStorage.setItem('custom_certs', JSON.stringify(certs));
-
       renderDynamicData();
       closeAdminModal();
     }
@@ -649,10 +684,10 @@
     function renderDynamicData() {
       const curData = JSON.parse(localStorage.getItem('custom_currently') || "[]");
       const curList = document.getElementById('currently-list');
-      curData.forEach(text => {
+      curData.forEach((text, i) => {
         const div = document.createElement('div');
-        div.className = "bg-corporate-card border border-corporate-border p-4 rounded-xl flex items-start gap-3";
-        div.innerHTML = `<i class="fa-solid fa-angle-right text-corporate-accent mt-0.5 text-sm"></i><p class="text-xs text-slate-300 leading-relaxed">${text}</p>`;
+        div.className = "min-w-[280px] md:min-w-[320px] bg-white p-5 rounded-xl border border-warm-dark/10 shadow-sm flex flex-col justify-between space-y-3 flex-shrink-0";
+        div.innerHTML = `<span class="text-[10px] font-mono text-warm-accent uppercase tracking-wider">0${i+3} / Activity</span><p class="text-xs text-warm-dark font-medium leading-relaxed">${text}</p>`;
         curList.appendChild(div);
       });
 
@@ -660,14 +695,14 @@
       const certContainer = document.getElementById('certifications-container');
       certData.forEach(c => {
         const div = document.createElement('div');
-        div.className = "bg-corporate-card border border-corporate-border p-3.5 rounded-lg flex items-center justify-between";
+        div.className = "bg-white p-4 rounded-xl border border-warm-dark/10 flex items-center justify-between shadow-sm";
         div.innerHTML = `
           <div>
-            <h3 class="text-xs font-semibold text-slate-200">${c.title}</h3>
-            <p class="text-[10px] text-slate-400 font-mono">${c.issuer}</p>
+            <h3 class="text-xs font-bold text-warm-dark">${c.title}</h3>
+            <p class="text-[10px] text-warm-muted">${c.issuer}</p>
           </div>
-          <button onclick="handleCertAction('${c.type}', '${c.target}', '${c.title}')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-corporate-border rounded text-[11px] font-mono transition">
-            ${c.type === 'url' ? 'Verify <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ms-1"></i>' : 'View Image <i class="fa-solid fa-image text-[9px] ms-1"></i>'}
+          <button onclick="handleCertAction('${c.type}', '${c.target}', '${c.title}')" class="text-xs font-semibold text-warm-accent hover:underline">
+            ${c.type === 'url' ? 'Verify <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ms-1"></i>' : 'View Image <i class="fa-solid fa-image text-[10px] ms-1"></i>'}
           </button>
         `;
         certContainer.appendChild(div);
