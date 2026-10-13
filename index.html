@@ -177,7 +177,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
         
-        <!-- Project 1 -->
+        <!-- Project 1: Tokopedia -->
         <div onclick="openProject('tokopedia')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="tokopedia.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Tokopedia Analysis">
@@ -191,7 +191,7 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 2: Enther -->
         <div onclick="openProject('enther')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Enther.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Enther UI/UX">
@@ -205,7 +205,7 @@
           </div>
         </div>
 
-        <!-- Project 3 -->
+        <!-- Project 3: Starwave -->
         <div onclick="openProject('starwave')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Starwave.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Starwave">
@@ -219,7 +219,7 @@
           </div>
         </div>
 
-        <!-- Project 4 -->
+        <!-- Project 4: Spotify -->
         <div onclick="openProject('spotify')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Tableau UAS.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Tableau UAS">
@@ -405,7 +405,7 @@
       </div>
     </section>
 
-    <!-- Get in Touch Section (Terintegrasi Google Form via Hidden Iframe) -->
+    <!-- Get in Touch Section (Terintegrasi Google Form) -->
     <section id="contact" class="pt-8 border-t border-warm-dark/10 space-y-8">
       
       <!-- Iframe Tersembunyi untuk Mencegah Redirect Halaman -->
@@ -445,27 +445,27 @@
         </div>
 
         <div class="md:col-span-7">
-          <!-- Ganti URL action dengan formResponse Google Form Anda, dan sesuaikan entry.xxxx dengan ID pertanyaan form Anda -->
-          <form id="gform" action="https://docs.google.com/forms/u/0/d/e/https://docs.google.com/forms/d/e/1FAIpQLSfaHT1Fk8rnsU3U7mLP9oYd8V4bHLyJmtqPFm49bOAn3D8uuQ/viewform?usp=pp_url&entry.16096942=test1&entry.948947833=test2&entry.1110719081=test3&entry.1728252742=test4/formResponse" method="POST" target="hidden_iframe" onsubmit="window.submitted=true;" class="space-y-4">
+          <!-- Form action menggunakan URL G-Form formResponse Anda -->
+          <form id="gform" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfaHT1Fk8rnsU3U7mLP9oYd8V4bHLyJmtqPFm49bOAn3D8uuQ/formResponse" method="POST" target="hidden_iframe" onsubmit="window.submitted=true;" class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div class="space-y-1">
                 <label class="text-[11px] font-medium text-warm-dark">First Name</label>
-                <input type="text" name="entry.FIRST_NAME_ID" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+                <input type="text" name="entry.16096942" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
               </div>
               <div class="space-y-1">
                 <label class="text-[11px] font-medium text-warm-dark">Last Name</label>
-                <input type="text" name="entry.LAST_NAME_ID" class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+                <input type="text" name="entry.948947833" class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
               </div>
             </div>
 
             <div class="space-y-1">
               <label class="text-[11px] font-medium text-warm-dark">Email *</label>
-              <input type="email" name="entry.EMAIL_ID" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+              <input type="email" name="entry.1110719081" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
             </div>
 
             <div class="space-y-1">
               <label class="text-[11px] font-medium text-warm-dark">Message</label>
-              <textarea name="entry.MESSAGE_ID" rows="5" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs resize-none"></textarea>
+              <textarea name="entry.1728252742" rows="5" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs resize-none"></textarea>
             </div>
 
             <div class="flex justify-end pt-2">
@@ -481,7 +481,7 @@
   </main>
 
 
-  <!-- ================= PROJECT DETAIL SUB-PAGE VIEW (HIDDEN BY DEFAULT) ================= -->
+  <!-- ================= PROJECT DETAIL SUB-PAGE VIEW ================= -->
   <div id="project-detail-view" class="hidden max-w-4xl mx-auto px-6 py-12 space-y-10">
     
     <!-- Tombol Kembali ke Home -->
@@ -590,57 +590,57 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Data Detail Project
+    // Data Detail Project (Diperbarui sesuai deskripsi & kontribusi Anda)
     const projectsData = {
       tokopedia: {
         title: "Tokopedia Data Analysis",
-        category: "Documentation / Data Analysis",
-        subtitle: "Analisis mendalam perilaku belanja dan tren transaksi e-commerce.",
+        category: "Documentation & System Design",
+        subtitle: "Analisis data transaksi serta perancangan antarmuka dan basis data.",
         image: "tokopedia.jpeg",
-        description: "Project ini berfokus pada pengolahan dataset marketplace Tokopedia untuk menemukan pola pembelian konsumen, kategori produk terlaris, serta evaluasi performa penjualan guna memberikan rekomendasi strategi bisnis yang efektif.",
+        description: "Project analisis marketplace Tokopedia yang mencakup pengolahan data perilaku belanja konsumen sekaligus perancangan arsitektur sistem dan antarmuka pengguna untuk mendukung fungsionalitas platform secara menyeluruh.",
         tasks: [
-          "Melakukan data cleaning dan preprocessing pada dataset mentah.",
-          "Menyusun dokumentasi analisis dan laporan temuan bisnis.",
-          "Merumuskan metrik kinerja utama (KPI) untuk evaluasi produk."
+          "Membuat dan merancang desain UI/UX platform.",
+          "Ikut berpartisipasi aktif dalam perancangan Entity Relationship Diagram (ERD) sistem.",
+          "Menyusun dokumentasi analisis dan laporan temuan bisnis."
         ],
         link: "https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing"
       },
       enther: {
         title: "Enther UI/UX Design",
         category: "Figma Prototype",
-        subtitle: "Perancangan antarmuka pengguna untuk aplikasi modern.",
+        subtitle: "Aplikasi pembelian panel surya & pemantauan penggunaan baterai.",
         image: "Enther.jpeg",
-        description: "Enther adalah konsep platform digital yang dirancang untuk memberikan pengalaman pengguna yang intuitif, bersih, dan fungsional dengan estetika visual tinggi.",
+        description: "Enther adalah aplikasi inovatif untuk pembelian panel surya serta pemantauan kondisi panel surya yang sudah dibeli secara real-time berdasarkan tingkat penggunaan energi harian dan pemantauan status baterai.",
         tasks: [
-          "Membuat user flow, wireframe, dan high-fidelity prototype di Figma.",
-          "Menyusun design system (warna, tipografi, dan komponen UI reusable).",
-          "Melakukan perancangan layout yang responsif untuk berbagai ukuran layar."
+          "Merancang dan membuat keseluruhan UI/UX untuk halaman Sign In dan Login.",
+          "Menyusun alur autentikasi pengguna yang aman dan ramah pengguna.",
+          "Mendesain komponen antarmuka yang bersih dan intuitif."
         ],
         link: "https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1"
       },
       starwave: {
         title: "Starwave Interface",
         category: "Figma Prototype",
-        subtitle: "Eksplorasi desain antarmuka interaktif dan kreatif.",
+        subtitle: "Platform e-commerce jual beli merchandise K-pop & artis.",
         image: "Starwave.jpeg",
-        description: "Starwave berfokus pada penciptaan interaksi digital yang mulus, memadukan visual sinematik dengan kemudahan navigasi bagi pengguna.",
+        description: "Starwave adalah platform digital khusus untuk jual beli merchandise K-pop dan berbagai artis idola, dirancang untuk memberikan pengalaman belanja online yang interaktif dan menarik bagi para penggemar.",
         tasks: [
-          "Mendesain tata letak halaman utama dan elemen interaktif.",
-          "Mengembangkan prototipe interaktif dengan transisi halaman yang halus di Figma.",
-          "Mengoptimalkan pengalaman pengguna (UX) untuk meminimalisir hambatan navigasi."
+          "Bertanggung jawab penuh dalam membuat keseluruhan desain UI/UX dari awal hingga akhir.",
+          "Membuat wireframe, high-fidelity design, dan interaktif prototype di Figma.",
+          "Mengoptimalkan pengalaman pengguna (UX) khusus kategori e-commerce merchandise artis."
         ],
         link: "https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1"
       },
       spotify: {
         title: "Spotify Songlist (1920–2020)",
-        category: "Tableau Dashboard",
-        subtitle: "Visualisasi interaktif tren musik lintas dekade.",
+        category: "Tableau Dashboard & Analysis",
+        subtitle: "Visualisasi interaktif chart musik dan analisis tren lintas dekade.",
         image: "Tableau UAS.jpeg",
-        description: "Dashboard analitik interaktif yang merangkum sejarah evolusi lagu-lagu di Spotify dari tahun 1920 hingga 2020, menampilkan pergeseran genre, popularitas, dan karakteristik audio lagu.",
+        description: "Dashboard analitik interaktif yang merangkum sejarah evolusi lagu-lagu di Spotify dari tahun 1920 hingga 2020, menampilkan pergeseran tren genre, popularitas, dan karakteristik audio lagu secara komprehensif.",
         tasks: [
-          "Mendesain dan menyusun tata letak dashboard interaktif di Tableau Public.",
-          "Memfilter dan mengolah data atribut musik berskala besar.",
-          "Menyajikan visualisasi tren popularitas lagu secara kronologis dan informatif."
+          "Mengerjakan keseluruhan proses pengolahan data dan analisis secara mandiri.",
+          "Membuat seluruh chart dan visualisasi data interaktif di Tableau.",
+          "Menyusun dan menyajikan insight tren musik lintas dekade secara kronologis."
         ],
         link: "https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
       }
