@@ -41,12 +41,12 @@
   <!-- Header / Navigation -->
   <header class="sticky top-0 z-40 bg-warm-bg/90 backdrop-blur-md border-b border-warm-dark/10">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="backToHome()">
         <span class="font-serif font-bold text-xl tracking-tight text-warm-dark">C. Juan Susanto</span>
         <span class="text-[10px] uppercase font-mono px-2 py-0.5 bg-warm-accent/10 text-warm-accent rounded-full ms-2" id="wib-clock">WIB 00:00:00</span>
       </div>
       
-      <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest text-warm-muted font-medium">
+      <nav id="main-nav" class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest text-warm-muted font-medium">
         <a href="#about" class="hover:text-warm-accent transition">About</a>
         <a href="#skills" class="hover:text-warm-accent transition">Skills</a>
         <a href="#projects" class="hover:text-warm-accent transition">Projects</a>
@@ -62,7 +62,8 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 space-y-24 py-12">
+  <!-- ================= MAIN HOME VIEW ================= -->
+  <main id="home-view" class="max-w-6xl mx-auto px-6 space-y-24 py-12">
     
     <!-- Hero Section -->
     <section id="about" class="relative pt-6 pb-12 border-b border-warm-dark/10">
@@ -164,23 +165,25 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section (Clickable to Details) -->
     <section id="projects" class="space-y-8">
       <div class="text-center space-y-2">
         <p class="text-xs uppercase tracking-widest text-warm-accent font-semibold">• Projects</p>
         <h2 class="text-3xl md:text-4xl font-serif text-warm-dark max-w-xl mx-auto">
           Projects that deliver more than design, strategy, and impact.
         </h2>
+        <p class="text-xs text-warm-muted">Klik salah satu project untuk melihat detail penjelasan & kontribusi peran saya.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
         
-        <div class="group space-y-3">
+        <!-- Project 1 -->
+        <div onclick="openProject('tokopedia')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="tokopedia.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Tokopedia Analysis">
-            <a href="https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Doc <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-            </a>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Details <i class="fa-solid fa-arrow-right ms-1"></i></span>
+            </div>
           </div>
           <div class="flex justify-between items-baseline pt-1">
             <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Tokopedia Data Analysis</h3>
@@ -188,12 +191,13 @@
           </div>
         </div>
 
-        <div class="group space-y-3">
+        <!-- Project 2 -->
+        <div onclick="openProject('enther')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Enther.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Enther UI/UX">
-            <a href="https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-            </a>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Details <i class="fa-solid fa-arrow-right ms-1"></i></span>
+            </div>
           </div>
           <div class="flex justify-between items-baseline pt-1">
             <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Enther UI/UX Design</h3>
@@ -201,12 +205,13 @@
           </div>
         </div>
 
-        <div class="group space-y-3">
+        <!-- Project 3 -->
+        <div onclick="openProject('starwave')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Starwave.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Starwave">
-            <a href="https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Figma <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-            </a>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Details <i class="fa-solid fa-arrow-right ms-1"></i></span>
+            </div>
           </div>
           <div class="flex justify-between items-baseline pt-1">
             <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Starwave Interface</h3>
@@ -214,12 +219,13 @@
           </div>
         </div>
 
-        <div class="group space-y-3">
+        <!-- Project 4 -->
+        <div onclick="openProject('spotify')" class="group space-y-3 cursor-pointer">
           <div class="h-80 rounded-2xl overflow-hidden bg-warm-card border border-warm-dark/10 relative shadow-md">
             <img src="Tableau UAS.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Tableau UAS">
-            <a href="https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Tableau <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-            </a>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-5 py-2.5 bg-warm-accent text-white text-xs font-semibold rounded-full shadow-lg">View Details <i class="fa-solid fa-arrow-right ms-1"></i></span>
+            </div>
           </div>
           <div class="flex justify-between items-baseline pt-1">
             <h3 class="font-serif font-bold text-lg text-warm-dark group-hover:text-warm-accent transition">Spotify Songlist (1920–2020)</h3>
@@ -399,8 +405,12 @@
       </div>
     </section>
 
-    <!-- Get in Touch Section -->
+    <!-- Get in Touch Section (Terintegrasi Google Form via Hidden Iframe) -->
     <section id="contact" class="pt-8 border-t border-warm-dark/10 space-y-8">
+      
+      <!-- Iframe Tersembunyi untuk Mencegah Redirect Halaman -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { alert('Pesan Anda berhasil dikirim ke Google Form!'); document.getElementById('gform').reset(); window.submitted=false; }"></iframe>
+
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
         <div class="md:col-span-5 space-y-6">
           <div>
@@ -409,7 +419,7 @@
           </div>
 
           <p class="text-xs text-warm-muted leading-relaxed">
-            If you have any inquiries or just want to say hi, please use the contact form!
+            If you have any inquiries or just want to say hi, please use the contact form! Pesan Anda akan langsung masuk ke database Google Form saya.
           </p>
 
           <div class="space-y-4 pt-4">
@@ -435,31 +445,32 @@
         </div>
 
         <div class="md:col-span-7">
-          <form action="mailto:christopherjuanmanuel@gmail.com" method="post" enctype="text/plain" class="space-y-4">
+          <!-- Ganti URL action dengan formResponse Google Form Anda, dan sesuaikan entry.xxxx dengan ID pertanyaan form Anda -->
+          <form id="gform" action="https://docs.google.com/forms/u/0/d/e/PASTE_URL_FORM_ANDA_DI_SINI/formResponse" method="POST" target="hidden_iframe" onsubmit="window.submitted=true;" class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div class="space-y-1">
                 <label class="text-[11px] font-medium text-warm-dark">First Name</label>
-                <input type="text" name="First Name" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+                <input type="text" name="entry.FIRST_NAME_ID" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
               </div>
               <div class="space-y-1">
                 <label class="text-[11px] font-medium text-warm-dark">Last Name</label>
-                <input type="text" name="Last Name" class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+                <input type="text" name="entry.LAST_NAME_ID" class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
               </div>
             </div>
 
             <div class="space-y-1">
               <label class="text-[11px] font-medium text-warm-dark">Email *</label>
-              <input type="email" name="Email" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
+              <input type="email" name="entry.EMAIL_ID" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs">
             </div>
 
             <div class="space-y-1">
               <label class="text-[11px] font-medium text-warm-dark">Message</label>
-              <textarea name="Message" rows="5" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs resize-none"></textarea>
+              <textarea name="entry.MESSAGE_ID" rows="5" required class="w-full px-3 py-2 bg-transparent border border-warm-dark/30 rounded focus:outline-none focus:border-warm-accent text-xs resize-none"></textarea>
             </div>
 
             <div class="flex justify-end pt-2">
               <button type="submit" class="px-8 py-2.5 bg-warm-accent hover:bg-opacity-90 text-white text-xs font-semibold rounded shadow transition">
-                Send
+                Send Message
               </button>
             </div>
           </form>
@@ -468,6 +479,58 @@
     </section>
 
   </main>
+
+
+  <!-- ================= PROJECT DETAIL SUB-PAGE VIEW (HIDDEN BY DEFAULT) ================= -->
+  <div id="project-detail-view" class="hidden max-w-4xl mx-auto px-6 py-12 space-y-10">
+    
+    <!-- Tombol Kembali ke Home -->
+    <div>
+      <button onclick="backToHome()" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-warm-accent hover:underline bg-white px-4 py-2 rounded-full border border-warm-dark/10 shadow-sm transition">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+      </button>
+    </div>
+
+    <!-- Header / Judul Project -->
+    <div class="space-y-4 border-b border-warm-dark/10 pb-8">
+      <span id="detail-category" class="text-xs uppercase font-mono tracking-widest text-warm-accent bg-warm-accent/10 px-3 py-1 rounded-full">Kategori</span>
+      <h1 id="detail-title" class="text-4xl md:text-5xl font-serif text-warm-dark">Judul Project</h1>
+      <p id="detail-subtitle" class="text-warm-muted text-sm md:text-base leading-relaxed">Ringkasan singkat project...</p>
+    </div>
+
+    <!-- Gambar Banner Project -->
+    <div class="rounded-2xl overflow-hidden shadow-xl border border-warm-dark/10 bg-warm-card h-[380px] md:h-[450px]">
+      <img id="detail-img" src="" class="w-full h-full object-cover" alt="Project Banner">
+    </div>
+
+    <!-- Grid Konten Detail (Deskripsi & Peran Saya) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pt-4">
+      
+      <!-- Penjelasan Tentang Project -->
+      <div class="md:col-span-7 space-y-6">
+        <h2 class="text-2xl font-serif text-warm-dark border-l-4 border-warm-accent pl-3">Tentang Project Ini</h2>
+        <p id="detail-description" class="text-xs md:text-sm text-warm-muted leading-relaxed">
+          Penjelasan detail mengenai latar belakang, tujuan, serta insight yang dihasilkan dari project ini.
+        </p>
+      </div>
+
+      <!-- Bagian yang Dikerjakan (Role & Contribution) -->
+      <div class="md:col-span-5 bg-white p-6 rounded-2xl border border-warm-dark/10 shadow-sm space-y-4">
+        <h3 class="text-xs uppercase font-mono tracking-wider text-warm-accent font-bold"><i class="fa-solid fa-user-gear me-1"></i> Apa Saja yang Saya Kerjakan</h3>
+        <ul id="detail-tasks" class="space-y-2 text-xs text-warm-dark leading-relaxed">
+          <!-- Diisi via JavaScript -->
+        </ul>
+        <div class="pt-4 border-t border-warm-dark/10">
+          <a id="detail-link" href="#" target="_blank" class="w-full py-2.5 bg-warm-accent hover:bg-opacity-90 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-2 shadow transition">
+            Lihat Project Asli <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
 
   <!-- Image Modal Popup -->
   <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
@@ -527,6 +590,97 @@
     setInterval(updateClock, 1000);
     updateClock();
 
+    // Data Detail Project
+    const projectsData = {
+      tokopedia: {
+        title: "Tokopedia Data Analysis",
+        category: "Documentation / Data Analysis",
+        subtitle: "Analisis mendalam perilaku belanja dan tren transaksi e-commerce.",
+        image: "tokopedia.jpeg",
+        description: "Project ini berfokus pada pengolahan dataset marketplace Tokopedia untuk menemukan pola pembelian konsumen, kategori produk terlaris, serta evaluasi performa penjualan guna memberikan rekomendasi strategi bisnis yang efektif.",
+        tasks: [
+          "Melakukan data cleaning dan preprocessing pada dataset mentah.",
+          "Menyusun dokumentasi analisis dan laporan temuan bisnis.",
+          "Merumuskan metrik kinerja utama (KPI) untuk evaluasi produk."
+        ],
+        link: "https://docs.google.com/document/d/1thC8zbln5zoRl_JoUXnaqmfYYPAnm7vTIvwO0rERN-A/edit?usp=sharing"
+      },
+      enther: {
+        title: "Enther UI/UX Design",
+        category: "Figma Prototype",
+        subtitle: "Perancangan antarmuka pengguna untuk aplikasi modern.",
+        image: "Enther.jpeg",
+        description: "Enther adalah konsep platform digital yang dirancang untuk memberikan pengalaman pengguna yang intuitif, bersih, dan fungsional dengan estetika visual tinggi.",
+        tasks: [
+          "Membuat user flow, wireframe, dan high-fidelity prototype di Figma.",
+          "Menyusun design system (warna, tipografi, dan komponen UI reusable).",
+          "Melakukan perancangan layout yang responsif untuk berbagai ukuran layar."
+        ],
+        link: "https://www.figma.com/design/S9xWe6jUplgmItNo3eOZl3/Enther?node-id=0-1&t=GyrQ5pJBP9eEg5mo-1"
+      },
+      starwave: {
+        title: "Starwave Interface",
+        category: "Figma Prototype",
+        subtitle: "Eksplorasi desain antarmuka interaktif dan kreatif.",
+        image: "Starwave.jpeg",
+        description: "Starwave berfokus pada penciptaan interaksi digital yang mulus, memadukan visual sinematik dengan kemudahan navigasi bagi pengguna.",
+        tasks: [
+          "Mendesain tata letak halaman utama dan elemen interaktif.",
+          "Mengembangkan prototipe interaktif dengan transisi halaman yang halus di Figma.",
+          "Mengoptimalkan pengalaman pengguna (UX) untuk meminimalisir hambatan navigasi."
+        ],
+        link: "https://www.figma.com/design/WPaVxUPYJr51uGEbd6tIx0/Star-wave?node-id=0-1&t=V6Gd10dtNOoiWdJs-1"
+      },
+      spotify: {
+        title: "Spotify Songlist (1920–2020)",
+        category: "Tableau Dashboard",
+        subtitle: "Visualisasi interaktif tren musik lintas dekade.",
+        image: "Tableau UAS.jpeg",
+        description: "Dashboard analitik interaktif yang merangkum sejarah evolusi lagu-lagu di Spotify dari tahun 1920 hingga 2020, menampilkan pergeseran genre, popularitas, dan karakteristik audio lagu.",
+        tasks: [
+          "Mendesain dan menyusun tata letak dashboard interaktif di Tableau Public.",
+          "Memfilter dan mengolah data atribut musik berskala besar.",
+          "Menyajikan visualisasi tren popularitas lagu secara kronologis dan informatif."
+        ],
+        link: "https://public.tableau.com/views/UASprojectDataVisualizationJuan2802507045/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+      }
+    };
+
+    // Fungsi Navigasi View Project Detail
+    function openProject(projectId) {
+      const proj = projectsData[projectId];
+      if (!proj) return;
+
+      document.getElementById('detail-category').innerText = proj.category;
+      document.getElementById('detail-title').innerText = proj.title;
+      document.getElementById('detail-subtitle').innerText = proj.subtitle;
+      document.getElementById('detail-img').src = proj.image;
+      document.getElementById('detail-description').innerText = proj.description;
+      document.getElementById('detail-link').href = proj.link;
+
+      const taskList = document.getElementById('detail-tasks');
+      taskList.innerHTML = '';
+      proj.tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.className = "flex items-start gap-2";
+        li.innerHTML = `<i class="fa-solid fa-check text-warm-accent mt-0.5"></i> <span>${task}</span>`;
+        taskList.appendChild(li);
+      });
+
+      document.getElementById('home-view').classList.add('hidden');
+      document.getElementById('main-nav').classList.add('hidden');
+      document.getElementById('project-detail-view').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Fungsi Kembali ke Beranda
+    function backToHome() {
+      document.getElementById('project-detail-view').classList.add('hidden');
+      document.getElementById('home-view').classList.remove('hidden');
+      document.getElementById('main-nav').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Toggle Hacktiv8 Dropdown Menu
     function toggleHacktiv8Menu(event) {
       event.stopPropagation();
@@ -534,7 +688,6 @@
       dropdown.classList.toggle('hidden');
     }
 
-    // Close dropdowns when clicking outside
     function closeAllDropdowns(event) {
       const dropdown = document.getElementById('hacktiv8-dropdown');
       if (dropdown && !dropdown.classList.contains('hidden')) {
@@ -542,7 +695,6 @@
       }
     }
 
-    // Handle Certificate Actions (URL or Image Modal)
     function handleCertAction(type, target) {
       if (type === 'url') {
         window.open(target, '_blank');
@@ -556,7 +708,6 @@
       document.getElementById('image-modal').classList.add('hidden');
     }
 
-    // Admin Panel Modals & Passcodes
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
     }
@@ -571,14 +722,13 @@
     function verifyAdmin() {
       const pass = document.getElementById('admin-passcode').value;
       if (pass === 'admin123' || pass === 'juan2026') {
-        document.getElementById('admin-auth-spec' || 'admin-auth-step').classList.add('hidden');
+        document.getElementById('admin-auth-step').classList.add('hidden');
         document.getElementById('admin-content-step').classList.remove('hidden');
       } else {
         alert('Incorrect Passcode');
       }
     }
 
-    // Dynamic Activity Adder
     function addCurrentlyItem() {
       const input = document.getElementById('new-currently-input');
       const val = input.value.trim();
@@ -593,7 +743,6 @@
       alert('Activity added successfully!');
     }
 
-    // Dynamic Certificate Adder
     function addNewCertItem() {
       const title = document.getElementById('cert-title-input').value.trim();
       const issuer = document.getElementById('cert-issuer-input').value.trim();
